@@ -13,12 +13,21 @@ class CompanyController extends Controller{
     
 
 
-    public function getAll(){
+    public function getAll($p){
 
         $array = ['error' => '', 'success' => '', 'list' => []];
 
         $user = auth()->user();
-        $companies = Company::select()->get();
+        /*$companies = Company::select()->get();*/
+        $query = Company::select();
+          
+        if($p !== '0'){
+            $query->orWhere('id', '=', $p)
+                  ->orWhere('social_reason', 'LIKE', '%'.$p.'%')
+                  ->orWhere('cnpj', 'LIKE', '%'.$p.'%');  
+
+        }
+        $companies = $query->get();  
 
         $array['list'] = $companies;
         

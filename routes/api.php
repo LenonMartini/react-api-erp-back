@@ -29,11 +29,11 @@ Route::middleware('auth:api')->group(function(){
     
 
     Route::get('/auth/users/{p}', [UserController::class, 'getAll']);
-
-
+    Route::post('/user', [UserController::class, 'create']);
+    Route::delete('/user/{id}', [UserController::class, 'destroy']);
     
-    Route::get('/companies', [CompanyController::class, 'getAll']);
-    Route::get('/companies/{id}', [CompanyController::class, 'getOne']);
+    Route::get('/companies/{p}', [CompanyController::class, 'getAll']);
+    Route::get('/company/{id}', [CompanyController::class, 'getOne']);
     Route::post('/company', [CompanyController::class, 'create']);
     Route::put('/company/{id}', [CompanyController::class, 'update']);
     Route::delete('/company/{id}', [CompanyController::class, 'destroy']);
